@@ -1,4 +1,18 @@
 public class BookAccess {
+    private static void comparePrices(Book book1, Book book2) {
+        float book1Price = book1.getPrice();
+        float book2Price = book2.getPrice();
+        String pricecmp = "";
+        if (book1Price < book2Price) {
+            pricecmp = book1.getTitle() + " costs less than " + book2.getTitle();
+        } else if (book1Price == book2Price) {
+            pricecmp = book1.getTitle() + " cost as much as " + book2.getTitle();
+        } else {
+            pricecmp = book1.getTitle() + " cost more than " + book2.getTitle();
+        }
+        System.out.println("Message:-> " + pricecmp);
+    }
+
     public static void main(String s[]) {
         Book book1 = new Book();
         book1.setTitle("Atomic Habits");
@@ -13,19 +27,7 @@ public class BookAccess {
         System.out.println(book1);
         System.out.println("The Second book object is");
         System.out.println(book2);
-    }
+        comparePrices(book1, book2);
 
-    private static void comparePrices(Book book1, Book book2) {
-        float book1Price = book1.getPrice();
-        float book2Price = book2.getPrice();
-        String pricecmp = "";
-        if (book1Price < book2Price) {
-            pricecmp = book1.getTitle() + " costs less than " + book2.getTitle();
-        } else if (book1Price == book2Price) {
-            pricecmp = book1.getTitle() + " cost as much as " + book2.getTitle();
-        } else {
-            pricecmp = book1.getTitle() + " cost more than " + book2.getTitle();
-        }
-        System.out.println("Message:-> " + pricecmp);
     }
 }
