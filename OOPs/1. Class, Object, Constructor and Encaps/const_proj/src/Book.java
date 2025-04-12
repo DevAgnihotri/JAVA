@@ -68,4 +68,12 @@ public class Book implements Cloneable {
         return "Title - " + this.title + "\nAuthor - "
                 + this.author + "\nPrice - " + String.format("%.2f", this.price);
     }
+
+    public boolean equals(Book book1, Book book2) {
+        if (book1.title == book2.title && book1.price == book2.price && book1.author == book2.author) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
