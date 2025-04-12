@@ -54,4 +54,22 @@ public class BookAccess {
         System.out.println("The third book cloned object is ");
         System.out.println(book3);
     }
+
+    public String equality(Book book1, Book book2) {
+        String result = "are equal,";
+        if (book1.getTitle() == book2.getTitle())
+            result = "Titles" + result;
+        else
+            result = result + "Titles";
+        if (book1.getAuthor() == book2.getAuthor())
+            result = "Authors" + result;
+        else
+            result = result + "Authors";
+        if (book1.getPrice() == book2.getPrice())
+            result = "Prices" + result;
+        else
+            result = result + "Prices";
+        result += " are not equal";
+        return result;
+    }
 }
