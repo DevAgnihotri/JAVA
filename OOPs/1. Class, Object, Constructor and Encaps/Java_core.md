@@ -299,11 +299,11 @@ public class Car {
 
 ### Logical Operators
 
-| Operator | Meaning     | Example               |
-| -------- | ----------- | --------------------- | ---------- | --------- | --- | --------- |
-| &&       | Logical AND | engineOn && speed > 0 |
-|          |             |                       | Logical OR | fuel < 10 |     | warningOn |
-| !        | Logical NOT | !engineOn             |
+| Operator | Meaning     | Example                 |
+| -------- | ----------- | ----------------------- | ---------- | ---------- | --- | ---------- |
+| `&&`     | Logical AND | `engineOn && speed > 0` |
+| `        |             | `                       | Logical OR | `fuel < 10 |     | warningOn` |
+| `!`      | Logical NOT | `!engineOn`             |
 
 ### Assignment Operators
 
@@ -315,9 +315,3 @@ public class Car {
 | \*=      | Multiplies and assigns | rpm \*= 2   |
 | /=       | Divides and assigns    | range /= 2  |
 | %=       | Modulus and assigns    | fuel %= 10  |
-
----
-
-(Sections 6 and 7 remain unchanged)
-
----
