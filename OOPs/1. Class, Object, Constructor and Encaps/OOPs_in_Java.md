@@ -8,7 +8,7 @@ Object Oriented Programming (OOP) is a programming paradigm based on the concept
 
 **Definition:** An object is an instance of a class. It represents a real-world entity with state and behavior.
 
-**Real-Life Example:** A **Car** is an object. It has properties like color, brand, and model (state), and can perform actions like drive and brake (behavior).
+**Real-Life Example:** A **Car** is an object. It has properties like color, brand, and model (state: variables), and can perform actions like drive and brake (behavior: method).
 
 **Syntax:**
 
