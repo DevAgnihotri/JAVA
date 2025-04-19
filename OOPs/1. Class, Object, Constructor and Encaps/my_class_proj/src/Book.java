@@ -1,22 +1,7 @@
-public class Book implements Cloneable {
+public class Book {
     private String title;
     private String author;
     private float price;
-
-    public Book() {
-    }
-
-    public Book(String title, String author, float price) {
-        this.title = title;
-        this.author = author;
-        this.price = price;
-    }
-
-    // Overriding the clone() method
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -44,16 +29,6 @@ public class Book implements Cloneable {
 
     public String toString() {
         return "Title - " + this.title + "\nAuthor - "
-                + this.author + "\nPrice - " + String.format("%.2f", this.price);
-    }
-
-    public boolean equals(Book book2) {
-        if (this.title.equals(book2.getTitle()) &&
-                this.author.equals(book2.getAuthor()) &&
-                this.price == book2.getPrice()) {
-            return true;
-        } else {
-            return false;
-        }
+                + this.author + "\nPrice" + String.format("%.2f", this.price);
     }
 }

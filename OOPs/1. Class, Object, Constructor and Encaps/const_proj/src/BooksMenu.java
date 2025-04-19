@@ -15,7 +15,7 @@ public class BooksMenu {
         int bkIdx = 0; // Keeps track of how many books have been added to the books array.
         while (true) {
             System.out.println("Press 1 to view books, 2 to add books, " +
-                    "3 to compare prices of books, 4 to edit price, any other key to exit");
+                    "3 to compare prices of books, 4 to edit price, 5 to compare equality in books, any other key to exit");
             String userAction = scanner.nextLine();
             if (userAction.equals("1")) {
                 for (int i = 0; i < books.length; i++) {
