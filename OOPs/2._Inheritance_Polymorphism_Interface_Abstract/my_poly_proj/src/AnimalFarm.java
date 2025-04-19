@@ -29,21 +29,33 @@ public class AnimalFarm {
                     System.out.println("Enter the name of the dog");
                     String dogName = sc.nextLine();
                     Animal anmlTmp = new Dog(dogName);
+                    System.out.println("Enter what the Dog eats ");
+                    String dogFood = sc.nextLine();
+                    anmlTmp.setFood(dogFood);
                     animals[anmlIdx++] = anmlTmp;
+
                 } else if (animalChoice.equals("2")) {
                     System.out.println("Enter name of the cat");
                     String catName = sc.nextLine();
                     Animal anmlTmp = new Cat(catName);
+                    System.out.println("Enter what the cat eats");
+                    String catFood = sc.nextLine();
+                    anmlTmp.setFood(catFood);
                     animals[anmlIdx++] = anmlTmp;
+
                 } else if (animalChoice.equals("3")) {
                     System.out.println("Enter name of the cow");
                     String cowName = sc.nextLine();
                     Animal anmlTmp = new Cat(cowName);
+                    System.out.println("Enter what the cow eats");
+                    String cowFood = sc.nextLine();
+                    anmlTmp.setFood(cowFood);
                     animals[anmlIdx++] = anmlTmp;
-                } else {
-                    System.out.println("Wrong Choice Senor");
-                    break;
+
                 }
+            } else {
+                System.out.println("Bye");
+                break;
             }
         }
 

@@ -1,5 +1,6 @@
 public class Animal {
     private String name;
+    private String food;
 
     public Animal(String name) {
         this.name = name;
@@ -9,9 +10,18 @@ public class Animal {
         return null;
     }
 
-    public String toString() {
-        return name.concat("says").concat(sound());
+    public void setFood(String food) {
+        this.food = food;
     }
+
+    public String getFood() {
+        return this.food;
+    }
+
+    public String toString() {
+        return name.concat(" says ").concat(sound().concat(" eats ").concat(food));
+    }
+
 }
 
 class Cat extends Animal {
