@@ -36,4 +36,8 @@ public class Task {
         return this.status;
     }
 
+    @Override
+    public String toString() {
+        return "Task: " + this.taskName + ", Priority: " + this.priority + ", Status: " + this.status;
+    }
 }
