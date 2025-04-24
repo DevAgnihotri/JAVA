@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.Locale.Category;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ArrayListExample {
     public static void main(String s[]) {
@@ -78,12 +80,26 @@ public class ArrayListExample {
                         todolist.remove(rmvIdx);
                         System.out.println("Task has been removed from the list");
                     }
-                } else {
-                    // Notify the user of invalid input and continue the loop
-                    System.out.println("Invalid input. Please try again.");
                 }
+
+                // Option 5: Sort tasks by priority
+                else if (userAction.equals("5")) {
+                    // Sort the ArrayList by age using a Comparator
+                    Collections.sort(todolist, new Comparator<Task>() {
+                        @Override
+                        public int compare(Task t1, Task t2) {
+                            return Integer.compare(t2.getPriority(), t1.getPriority());
+                        }
+                    });
+                    System.out.println("Tasks sorted by priority (High to Low):");
+                    todolist.forEach(task -> System.out.println(task));
+                }
+
+                else {
+                    break;
+                }
+
             }
-            sc.close();
         } catch (NumberFormatException nfe) {
             System.out.println("Invalid input. Please enter a valid number.");
         }
