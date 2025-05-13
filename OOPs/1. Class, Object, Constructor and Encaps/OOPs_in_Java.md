@@ -75,7 +75,7 @@ Hi, my name is Alice and I am 25 years old.
 1. **Fields (Attributes):** Variables that hold the state of the object.
 2. **Methods:** Functions that define the behavior of the object.
 3. **Constructors:** Special methods used to initialize objects.
-4. **Access Modifiers:** Keywords like `public`, `private`, and `protected` that control access to class members.
+4. **Access Modifiers:** Keywords like `public`, `private`, `default` and `protected` that control access to class members.
 
 **Real-Life Example:** A **Car class** is a blueprint. Multiple car objects like sedan, SUV, and hatchback can be made from it.
 
@@ -117,17 +117,38 @@ class Car {
 - Document the purpose and usage of the class for better maintainability.
 - Avoid making classes unnecessarily large; split them into smaller, cohesive classes if needed.
 
+---
+
 ## 🔹 3. Abstraction
 
-**Definition:** Abstraction is the process of hiding internal details and showing only essential information.
+**Definition:** Abstraction is the process of hiding the internal details of a showing only the relevant information to the user. It focuses on "what" an object does rather than "how" it does it.
 
-**Real-Life Example:** A **Car dashboard** provides only necessary controls like steering and speedometer; the internal engine workings are abstracted away.
+**Key Characteristics of Abstraction:**
 
-**Syntax (abstract class):**
+- **Simplification:** Reduces complexity by showing only the relevant details to the user.
+- **Focus on Functionality:** Allows developers to focus on high-level design without worrying about implementation details.
+- **Improved Maintainability:** Changes to the internal implementation do not affect the external interface.
+
+**Real-Life Example:** A **Car dashboard** provides controls like steering, accelerator, and speedometer. The user interacts with these controls without needing to understand the internal mechanics of the engine or transmission.
+
+**Types of Abstraction in Java:**
+
+1. **Abstract Classes:** Classes that cannot be instantiated and may contain both abstract (unimplemented) and concrete (implemented) methods.
+2. **Interfaces:** Fully abstract types that define a contract for classes to implement.
+
+### ➤ Abstract Classes
+
+**Syntax:**
 
 ```java
 abstract class ClassName {
-    abstract void method();
+    // Abstract method (no body)
+    abstract void methodName();
+
+    // Concrete method (with body)
+    void concreteMethod() {
+        System.out.println("This is a concrete method.");
+    }
 }
 ```
 
@@ -136,24 +157,123 @@ abstract class ClassName {
 ```java
 abstract class Car {
     abstract void start();
+
+    void stop() {
+        System.out.println("Car is stopping.");
+    }
 }
 
 class Sedan extends Car {
     void start() {
-        System.out.println("Sedan starting with key");
+        System.out.println("Sedan starting with key.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Sedan();
+        myCar.start();
+        myCar.stop();
     }
 }
 ```
 
-**Use Case:** Creating a general Car class to be extended by specific car types.
+**Output:**
+
+```
+Sedan starting with key.
+Car is stopping.
+```
+
+**Use Case:** Abstract classes are useful when we want to provide a common base class with some shared functionality while allowing subclasses to define specific behaviors.
+
+### ➤ Interfaces
+
+**Syntax:**
+
+```java
+interface InterfaceName {
+    void methodName();
+}
+```
+
+**Code Example:**
+
+```java
+interface Vehicle {
+    void start();
+    void stop();
+}
+
+class Bike implements Vehicle {
+    public void start() {
+        System.out.println("Bike starting with kick.");
+    }
+
+    public void stop() {
+        System.out.println("Bike is stopping.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle myBike = new Bike();
+        myBike.start();
+        myBike.stop();
+    }
+}
+```
+
+**Output:**
+
+```
+Bike starting with kick.
+Bike is stopping.
+```
+
+**Use Case:** Interfaces are ideal for defining a contract that multiple classes can implement, ensuring consistency across different implementations.
+
+**Advantages of Abstraction:**
+
+- **Code Reusability:** Abstract classes and interfaces promote code reuse by defining common behaviors.
+- **Flexibility:** Allows developers to change the implementation without affecting the external interface.
+- **Security:** Hides sensitive implementation details from the user.
+
+**Best Practices for Abstraction:**
+
+- Use abstract classes when you need to share code among related classes.
+- Use interfaces when you need to define a contract for unrelated classes.
+- Avoid overusing abstraction, as it can lead to unnecessary complexity.
+
+> 📘 **Note:** Abstraction is a cornerstone of OOP, enabling developers to build scalable and maintainable applications by separating concerns and focusing on high-level design.
 
 ---
 
 ## 🔹 4. Encapsulation
 
-**Definition:** Encapsulation is the technique of wrapping data (variables) and code (methods) together as a single unit and restricting access to some components.
+**Definition:** Encapsulation is the technique of wrapping data (variables) and code (methods) together as a single unit and restricting access to some components. It ensures that the internal representation of an object is hidden from the outside world, exposing only what is necessary.
 
-**Real-Life Example:** A **Car's speedometer**—you can see the speed but can't change the way it calculates speed.
+**Key Characteristics of Encapsulation:**
+
+- **Data Hiding:** Internal details of an object are hidden, and only a controlled interface is exposed.
+- **Access Control:** Access modifiers like `private`, `protected`, and `public` are used to control access to class members.
+- **Improved Security:** Sensitive data is protected from unauthorized access or modification.
+- **Ease of Maintenance:** Changes to the internal implementation do not affect external code that uses the object.
+
+**Advantages of Encapsulation:**
+
+1. **Improved Code Maintainability:** Encapsulation allows changes to the internal implementation without affecting external code.
+2. **Enhanced Security:** By restricting access to certain components, encapsulation prevents unintended interference or misuse.
+3. **Modularity:** Encapsulation helps in dividing a program into smaller, manageable parts.
+4. **Reusability:** Encapsulated code can be reused across different parts of a program or in other programs.
+5. **Flexibility:** Encapsulation allows developers to modify the internal workings of a class without impacting its external behavior.
+
+**Real-Life Example:** A **Car's speedometer**—you can see the speed but can't directly change the way it calculates speed. The internal mechanism is hidden, and only the result is exposed.
+
+**How Encapsulation Works in Java:**
+
+1. Declare the variables of a class as `private`.
+2. Provide `public` getter and setter methods to access and update the values of private variables.
 
 **Syntax (getter/setter):**
 
@@ -169,51 +289,202 @@ public void setVar(Type val);
 class Car {
     private int speed;
 
+    // Getter method
     public int getSpeed() {
         return speed;
     }
 
+    // Setter method
     public void setSpeed(int s) {
-        speed = s;
+        if (s >= 0) { // Adding validation
+            speed = s;
+        } else {
+            System.out.println("Speed cannot be negative.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.setSpeed(50); // Setting speed
+        System.out.println("Car speed: " + myCar.getSpeed()); // Getting speed
     }
 }
 ```
 
-**Use Case:** Hiding and controlling car speed access.
+**Output:**
+
+```
+Car speed: 50
+```
+
+**Best Practices for Encapsulation:**
+
+1. Always declare class variables as `private` to restrict direct access.
+2. Use meaningful names for getter and setter methods, following the naming convention (`getVariableName`, `setVariableName`).
+3. Add validation logic in setter methods to ensure data integrity.
+4. Avoid exposing unnecessary internal details through getter and setter methods.
+5. Document the purpose of each getter and setter method for better maintainability.
+
+> 📘 **Note:** Encapsulation is a fundamental principle of OOP that promotes data security, modularity, and maintainability, making it easier to build robust and scalable applications.
 
 ---
 
 ## 🔹 5. Inheritance
 
-**Definition:** Inheritance allows one class to acquire properties and behaviors from another class.
+**Definition:** Inheritance is a mechanism in object-oriented programming that allows one class (child or subclass) to inherit the properties and behaviors of another class (parent or superclass). It promotes code reuse and establishes a natural hierarchy between classes.
 
-**Real-Life Example:** An **ElectricCar** inherits general properties from Car like wheels and steering.
+**Real-Life Example:** An **ElectricCar** inherits general properties from a **Car** like wheels, steering, and the ability to drive, while adding its own unique behavior, such as charging the battery.
 
-**Syntax:**
+---
+
+### ➤ Key Characteristics of Inheritance:
+
+1. **Code Reusability:** Common functionality can be written in the parent class and reused in child classes, reducing redundancy.
+2. **Hierarchical Structure:** Inheritance establishes a parent-child relationship, creating a clear hierarchy in the codebase.
+3. **Extensibility:** Child classes can extend the functionality of the parent class by adding new methods or overriding existing ones.
+4. **Polymorphism Support:** Inheritance enables polymorphism, allowing a child class to provide its own implementation of a parent class method.
+
+---
+
+### ➤ Syntax:
 
 ```java
+class ParentClass {
+    // fields and methods
+}
+
 class ChildClass extends ParentClass {
-    // additional methods or fields
+    // additional fields and methods
 }
 ```
 
-**Code Example:**
+---
+
+### ➤ Code Example:
 
 ```java
 class Car {
+    String brand;
+
     void drive() {
         System.out.println("Driving a car");
     }
 }
 
 class ElectricCar extends Car {
+    int batteryCapacity;
+
     void charge() {
-        System.out.println("Charging battery");
+        System.out.println("Charging the battery");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ElectricCar myElectricCar = new ElectricCar();
+        myElectricCar.brand = "Tesla";
+        myElectricCar.batteryCapacity = 100;
+        myElectricCar.drive(); // Inherited from Car
+        myElectricCar.charge(); // Defined in ElectricCar
     }
 }
 ```
 
-**Use Case:** Sharing general car functionalities with electric or hybrid variations.
+**Output:**
+
+```
+Driving a car
+Charging the battery
+```
+
+---
+
+### ➤ Types of Inheritance in Java:
+
+1. **Single Inheritance:** A child class inherits from one parent class.
+
+   ```java
+   class Parent {}
+   class Child extends Parent {}
+   ```
+
+2. **Multilevel Inheritance:** A class inherits from a child class, forming a chain.
+
+   ```java
+   class Grandparent {}
+   class Parent extends Grandparent {}
+   class Child extends Parent {}
+   ```
+
+3. **Hierarchical Inheritance:** Multiple child classes inherit from a single parent class.
+   ```java
+   class Parent {}
+   class Child1 extends Parent {}
+   class Child2 extends Parent {}
+   ```
+
+> 📘 **Note:** Java does not support multiple inheritance with classes to avoid ambiguity (the "diamond problem"). However, it can be achieved using interfaces.
+
+---
+
+### ➤ Method Overriding in Inheritance:
+
+Child classes can provide their own implementation of a method defined in the parent class. This is known as **method overriding**.
+
+**Code Example:**
+
+```java
+class Car {
+    void start() {
+        System.out.println("Starting a generic car");
+    }
+}
+
+class SportsCar extends Car {
+    @Override
+    void start() {
+        System.out.println("Starting a sports car with a roar");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new SportsCar();
+        myCar.start(); // Calls the overridden method in SportsCar
+    }
+}
+```
+
+**Output:**
+
+```
+Starting a sports car with a roar
+```
+
+---
+
+### ➤ Advantages of Inheritance:
+
+1. **Code Reusability:** Reduces duplication by reusing existing code in parent classes.
+2. **Improved Maintainability:** Changes in the parent class automatically propagate to child classes.
+3. **Extensibility:** Allows adding new features to child classes without modifying the parent class.
+4. **Polymorphism:** Enables dynamic method invocation, improving flexibility and scalability.
+
+---
+
+### ➤ Best Practices for Using Inheritance:
+
+1. **Use Inheritance for "Is-A" Relationships:** Ensure the child class is a specialized version of the parent class (e.g., an ElectricCar "is a" Car).
+2. **Avoid Deep Inheritance Hierarchies:** Keep the hierarchy shallow to reduce complexity and improve readability.
+3. **Favor Composition Over Inheritance:** Use composition when a "Has-A" relationship is more appropriate (e.g., a Car "has a" Engine).
+4. **Override Methods Judiciously:** Only override methods when necessary to provide specific behavior in the child class.
+5. **Document the Hierarchy:** Clearly document the purpose of each class in the hierarchy for better maintainability.
+
+> 📘 **Note:** Inheritance is a powerful tool in OOP, but it should be used carefully to avoid tight coupling and maintain a clean, modular design.
+
+---
 
 ---
 
