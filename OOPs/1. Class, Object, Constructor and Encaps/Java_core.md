@@ -176,6 +176,138 @@ Modifiers change the accessibility and behavior of classes, methods, and variabl
 | protected | Same package + subclasses                    |
 | default   | Only in the same package (no keyword needed) |
 
+### Examples of Access Modifiers
+
+#### 1. `public` Modifier
+
+A `public` member can be accessed from anywhere.
+
+```java
+// File: Main.java
+public class Main {
+    public String message = "Hello, World!";
+
+    public void displayMessage() {
+        System.out.println(message);
+    }
+}
+
+// File: Test.java
+public class Test {
+    public static void main(String[] args) {
+        Main main = new Main();
+        System.out.println(main.message); // Accessing public variable
+        main.displayMessage();           // Accessing public method
+    }
+}
+```
+
+#### 2. `private` Modifier
+
+A `private` member can only be accessed within the same class.
+
+```java
+public class Car {
+    private String model = "Sedan";
+
+    private void displayModel() {
+        System.out.println("Model: " + model);
+    }
+
+    public void showDetails() {
+        displayModel(); // Accessing private method within the same class
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Car car = new Car();
+        // car.model; // Error: model has private access
+        // car.displayModel(); // Error: displayModel() has private access
+        car.showDetails(); // Indirect access through public method
+    }
+}
+```
+
+#### 3. `protected` Modifier
+
+A `protected` member can be accessed within the same package or by subclasses.
+
+```java
+// File: Vehicle.java
+package vehicles;
+
+public class Vehicle {
+    protected String type = "Car";
+
+    protected void displayType() {
+        System.out.println("Vehicle Type: " + type);
+    }
+}
+
+// File: Car.java
+package vehicles;
+
+public class Car extends Vehicle {
+    public void showDetails() {
+        System.out.println(type); // Accessing protected variable
+        displayType();            // Accessing protected method
+    }
+}
+
+// File: Test.java
+package test;
+
+import vehicles.Car;
+
+public class Test {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.showDetails(); // Accessing protected members through subclass
+    }
+}
+```
+
+#### 4. `default` (Package-Private) Modifier
+
+A member with no modifier is accessible only within the same package.
+
+```java
+// File: Bike.java
+package vehicles;
+
+class Bike {
+    String brand = "Yamaha"; // Default access modifier
+
+    void displayBrand() { // Default access modifier
+        System.out.println("Brand: " + brand);
+    }
+}
+
+// File: Test.java
+package vehicles;
+
+public class Test {
+    public static void main(String[] args) {
+        Bike bike = new Bike();
+        System.out.println(bike.brand); // Accessing default variable
+        bike.displayBrand();           // Accessing default method
+    }
+}
+
+// File: TestOutside.java
+package test;
+
+import vehicles.Bike;
+
+public class TestOutside {
+    public static void main(String[] args) {
+        // Bike bike = new Bike(); // Error: Bike is not public
+        // bike.brand; // Error: brand has default access
+    }
+}
+```
+
 #### Non-access Modifiers Table:
 
 | Modifier     | Use                                                         |
