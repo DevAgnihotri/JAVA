@@ -2,6 +2,94 @@
 
 Object Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data. Java is a language that strongly supports OOP principles.
 
+**Definition:**  
+Java is a class-based, object-oriented programming language that implements OOP principles strictly. It allows developers to design software by modeling real-world entities as objects, making the code more modular, reusable, and easier to maintain.
+
+### Key Features:
+
+- **Class-based structure:**  
+  Java organizes code into classes, which act as blueprints for creating objects.
+- **Support for OOP principles:**  
+  Java supports the four fundamental principles of Object-Oriented Programming:
+
+  1. **Abstraction:** Hiding implementation details and exposing only the essential features.
+  2. **Encapsulation:** Wrapping data (fields) and methods into a single unit (class) and restricting access using access modifiers.
+  3. **Inheritance:** Allowing a class to inherit properties and methods from another class, promoting code reuse.
+  4. **Polymorphism:** Enabling a single interface to represent different underlying forms (e.g., method overloading and overriding).
+
+- **Built-in access modifiers:**  
+  Java provides four access levels to control visibility:
+  - `private`: Accessible only within the same class.
+  - `public`: Accessible from anywhere.
+  - `protected`: Accessible within the same package and subclasses.
+  - Default (no modifier): Accessible within the same package.
+
+**Syntax Example:**
+
+```java
+public class ClassName {
+    // fields (variables) and methods
+}
+```
+
+**Use Case:**  
+OOP principles are ideal for building robust, modular, and scalable applications. For example, in a car-related Java application, you can model cars as objects with attributes like `color`, `model`, and `speed`, and behaviors like `drive()` and `brake()`.
+
+---
+
+## 🔹 Related Concepts
+
+### ➤ Constructor
+
+**Definition:**  
+A constructor is a special method invoked when an object is created. It is used to initialize the object's state (fields). Constructors have the same name as the class and do not have a return type.
+
+**Real-Life Example:**  
+Think of a **Car factory** that uses a constructor to create a fully set-up car. For example, when a car is manufactured, it is initialized with specific attributes like its model, color, and engine type.
+
+**Syntax:**
+
+```java
+ClassName() {
+    // initialization code
+}
+```
+
+**Code Example:**
+
+```java
+class Car {
+    String model;
+    String color;
+
+    // Constructor
+    Car(String model, String color) {
+        this.model = model;
+        this.color = color;
+        System.out.println("Car constructed: " + model + " in " + color);
+    }
+}
+```
+
+**Use Case:**  
+Constructors are particularly useful for automatically initializing object data during creation. For example:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Car car1 = new Car("Sedan", "Red");
+        Car car2 = new Car("SUV", "Blue");
+    }
+}
+```
+
+**Output:**
+
+```
+Car constructed: Sedan in Red
+Car constructed: SUV in Blue
+```
+
 ---
 
 ## 🔹 1. Objects
@@ -719,248 +807,6 @@ Starting a sports car with a roar
 
 ---
 
-## 🔹 OOP in Java
-
-**Definition:**  
-Java is a class-based, object-oriented programming language that implements OOP principles strictly. It allows developers to design software by modeling real-world entities as objects, making the code more modular, reusable, and easier to maintain.
-
-### Key Features:
-
-- **Class-based structure:**  
-  Java organizes code into classes, which act as blueprints for creating objects.
-- **Support for OOP principles:**  
-  Java supports the four fundamental principles of Object-Oriented Programming:
-
-  1. **Abstraction:** Hiding implementation details and exposing only the essential features.
-  2. **Encapsulation:** Wrapping data (fields) and methods into a single unit (class) and restricting access using access modifiers.
-  3. **Inheritance:** Allowing a class to inherit properties and methods from another class, promoting code reuse.
-  4. **Polymorphism:** Enabling a single interface to represent different underlying forms (e.g., method overloading and overriding).
-
-- **Built-in access modifiers:**  
-  Java provides four access levels to control visibility:
-  - `private`: Accessible only within the same class.
-  - `public`: Accessible from anywhere.
-  - `protected`: Accessible within the same package and subclasses.
-  - Default (no modifier): Accessible within the same package.
-
-**Syntax Example:**
-
-```java
-public class ClassName {
-    // fields (variables) and methods
-}
-```
-
-**Use Case:**  
-OOP principles are ideal for building robust, modular, and scalable applications. For example, in a car-related Java application, you can model cars as objects with attributes like `color`, `model`, and `speed`, and behaviors like `drive()` and `brake()`.
-
----
-
-## 🔹 Related Concepts
-
-### ➤ Constructor
-
-**Definition:**  
-A constructor is a special method invoked when an object is created. It is used to initialize the object's state (fields). Constructors have the same name as the class and do not have a return type.
-
-**Real-Life Example:**  
-Think of a **Car factory** that uses a constructor to create a fully set-up car. For example, when a car is manufactured, it is initialized with specific attributes like its model, color, and engine type.
-
-**Syntax:**
-
-```java
-ClassName() {
-    // initialization code
-}
-```
-
-**Code Example:**
-
-```java
-class Car {
-    String model;
-    String color;
-
-    // Constructor
-    Car(String model, String color) {
-        this.model = model;
-        this.color = color;
-        System.out.println("Car constructed: " + model + " in " + color);
-    }
-}
-```
-
-**Use Case:**  
-Constructors are particularly useful for automatically initializing object data during creation. For example:
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        Car car1 = new Car("Sedan", "Red");
-        Car car2 = new Car("SUV", "Blue");
-    }
-}
-```
-
-**Output:**
-
-```
-Car constructed: Sedan in Red
-Car constructed: SUV in Blue
-```
-
----
-
-### ➤ Encapsulation
-
-**Definition:**  
-Encapsulation is the process of bundling data (fields) and methods that operate on the data into a single unit (class). It also involves restricting direct access to some of the object's components, typically using access modifiers.
-
-**Real-Life Example:**  
-A car's engine is encapsulated within the car. You cannot directly access or modify the engine's internal components; instead, you use the car's interface (like the accelerator pedal) to interact with it.
-
-**Code Example:**
-
-```java
-class Car {
-    private String model; // private field
-
-    // Public getter method
-    public String getModel() {
-        return model;
-    }
-
-    // Public setter method
-    public void setModel(String model) {
-        this.model = model;
-    }
-}
-```
-
-**Use Case:**  
-Encapsulation ensures that the internal state of an object is protected from unintended interference and misuse. For example:
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        Car car = new Car();
-        car.setModel("Sedan");
-        System.out.println("Car model: " + car.getModel());
-    }
-}
-```
-
-**Output:**
-
-```
-Car model: Sedan
-```
-
----
-
-### ➤ Inheritance
-
-**Definition:**  
-Inheritance allows a class (child class) to acquire the properties and methods of another class (parent class). This promotes code reuse and establishes a hierarchical relationship between classes.
-
-**Real-Life Example:**  
-A **Car** is a type of **Vehicle**. The `Car` class can inherit common properties like `speed` and `fuel` from the `Vehicle` class while adding its own specific features.
-
-**Code Example:**
-
-```java
-class Vehicle {
-    int speed;
-
-    void move() {
-        System.out.println("Vehicle is moving at speed: " + speed);
-    }
-}
-
-class Car extends Vehicle {
-    String model;
-
-    void displayModel() {
-        System.out.println("Car model: " + model);
-    }
-}
-```
-
-**Use Case:**  
-Inheritance simplifies code by allowing shared functionality to reside in a parent class. For example:
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        Car car = new Car();
-        car.speed = 100;
-        car.model = "Sedan";
-        car.move();
-        car.displayModel();
-    }
-}
-```
-
-**Output:**
-
-```
-Vehicle is moving at speed: 100
-Car model: Sedan
-```
-
----
-
-### ➤ Polymorphism
-
-**Definition:**  
-Polymorphism allows methods to perform different tasks based on the object that calls them. It can be achieved through method overloading (compile-time polymorphism) or method overriding (runtime polymorphism).
-
-**Real-Life Example:**  
-A **Car** can behave differently based on its type. For example, a sports car accelerates faster than a regular car.
-
-**Code Example:**
-
-```java
-class Car {
-    void drive() {
-        System.out.println("Driving a car");
-    }
-}
-
-class SportsCar extends Car {
-    @Override
-    void drive() {
-        System.out.println("Driving a sports car at high speed");
-    }
-}
-```
-
-**Use Case:**  
-Polymorphism enables flexibility and scalability in code. For example:
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        Car car1 = new Car();
-        Car car2 = new SportsCar();
-
-        car1.drive(); // Calls Car's drive method
-        car2.drive(); // Calls SportsCar's drive method
-    }
-}
-```
-
-**Output:**
-
-```
-Driving a car
-Driving a sports car at high speed
-```
-
-This expanded content provides a more detailed explanation of OOP concepts in Java, complete with real-life analogies, code examples, and use cases.
-
----
-
 ### ➤ Interface
 
 **Definition:** An interface is a contract that a class can implement. It contains abstract methods only.
@@ -1023,3 +869,270 @@ class Car {
 > 📘 **Note:** Mastery of OOP concepts leads to better design and development of clean, maintainable Java applications.
 
 ---
+
+## 🔹 7. Packages
+
+**Definition:**  
+A package in Java is a namespace that organizes classes and interfaces. It helps avoid name conflicts and makes it easier to manage and structure large projects.
+
+---
+
+### ➤ Defining a Package
+
+To define a package, use the `package` keyword at the top of your Java file. For example:
+
+```java
+package com.example.myapp;
+
+public class MyClass {
+    public void display() {
+        System.out.println("This is MyClass in com.example.myapp package.");
+    }
+}
+```
+
+**Advantages of Packages:**
+
+1. **Organized Code:** Helps group related classes and interfaces together.
+2. **Avoids Name Conflicts:** Prevents naming clashes by providing unique namespaces.
+3. **Access Control:** Provides access protection with public, private, and protected modifiers.
+4. **Reusability:** Makes it easier to reuse classes across different projects.
+
+---
+
+### ➤ Setting the CLASSPATH for Packages
+
+The `CLASSPATH` environment variable tells the Java compiler and JVM where to look for user-defined classes and packages.
+
+**Steps to Set CLASSPATH:**
+
+1. Locate the directory containing your package.
+2. Add the directory path to the `CLASSPATH` variable.
+
+**Example (Windows):**
+
+```bash
+set CLASSPATH=C:\myproject\classes;
+```
+
+**Example (Linux/Mac):**
+
+```bash
+export CLASSPATH=/home/user/myproject/classes
+```
+
+**Note:** You can also use the `-cp` option with `javac` and `java` commands to specify the classpath.
+
+---
+
+### ➤ Making JAR Files for Library Packages
+
+A JAR (Java Archive) file is a compressed file format used to bundle Java classes, metadata, and resources into a single file.
+
+**Steps to Create a JAR File:**
+
+1. Compile your Java files into `.class` files.
+2. Use the `jar` command to create the JAR file.
+
+**Example:**
+
+```bash
+jar cf mylibrary.jar -C classes/ .
+```
+
+- `c`: Create a new JAR file.
+- `f`: Specify the file name.
+- `-C`: Change to the specified directory.
+
+**Using the JAR File:**
+
+Add the JAR file to your `CLASSPATH`:
+
+```bash
+java -cp mylibrary.jar com.example.myapp.MyClass
+```
+
+---
+
+### ➤ Import and Static Import
+
+**Import:**  
+The `import` keyword allows you to use classes from other packages without specifying their fully qualified names.
+
+**Example:**
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        System.out.println("Hello, " + name);
+    }
+}
+```
+
+**Static Import:**  
+The `static import` keyword allows you to access static members of a class directly, without qualifying them with the class name.
+
+**Example:**
+
+```java
+import static java.lang.Math.*;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Square root of 16: " + sqrt(16));
+        System.out.println("Value of PI: " + PI);
+    }
+}
+```
+
+---
+
+### ➤ Naming Conventions for Packages
+
+1. **Use Lowercase Letters:** Package names should be in lowercase to avoid conflicts with class names.
+2. **Follow Domain Name Structure:** Use your organization's domain name in reverse as the package name prefix (e.g., `com.example.myapp`).
+3. **Be Descriptive:** Use meaningful names that reflect the purpose of the package.
+
+**Example:**
+
+- `com.companyname.projectname.module`
+
+---
+
+## 🔹 8. Networking (`java.net` Package)
+
+**Definition:**  
+The `java.net` package provides classes for networking operations, such as creating sockets, sending and receiving data, and building networked applications.
+
+---
+
+### ➤ Key Classes in `java.net`
+
+1. **`InetAddress`:** Represents an IP address.
+
+   - **Example:**
+
+     ```java
+     import java.net.InetAddress;
+
+     public class Main {
+         public static void main(String[] args) throws Exception {
+             InetAddress address = InetAddress.getByName("www.google.com");
+             System.out.println("IP Address: " + address.getHostAddress());
+         }
+     }
+     ```
+
+2. **`URL`:** Represents a Uniform Resource Locator.
+
+   - **Example:**
+
+     ```java
+     import java.net.URL;
+
+     public class Main {
+         public static void main(String[] args) throws Exception {
+             URL url = new URL("https://www.example.com");
+             System.out.println("Protocol: " + url.getProtocol());
+             System.out.println("Host: " + url.getHost());
+             System.out.println("Port: " + url.getPort());
+         }
+     }
+     ```
+
+3. **`HttpURLConnection`:** Used for HTTP communication.
+
+   - **Example:**
+
+     ```java
+     import java.net.HttpURLConnection;
+     import java.net.URL;
+
+     public class Main {
+         public static void main(String[] args) throws Exception {
+             URL url = new URL("https://www.example.com");
+             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+             connection.setRequestMethod("GET");
+             System.out.println("Response Code: " + connection.getResponseCode());
+         }
+     }
+     ```
+
+4. **`Socket` and `ServerSocket`:** Used for TCP communication.
+
+   - **Example (Client):**
+
+     ```java
+     import java.io.OutputStream;
+     import java.net.Socket;
+
+     public class Client {
+         public static void main(String[] args) throws Exception {
+             Socket socket = new Socket("localhost", 8080);
+             OutputStream output = socket.getOutputStream();
+             output.write("Hello, Server!".getBytes());
+             socket.close();
+         }
+     }
+     ```
+
+   - **Example (Server):**
+
+     ```java
+     import java.io.InputStream;
+     import java.net.ServerSocket;
+     import java.net.Socket;
+
+     public class Server {
+         public static void main(String[] args) throws Exception {
+             ServerSocket serverSocket = new ServerSocket(8080);
+             Socket socket = serverSocket.accept();
+             InputStream input = socket.getInputStream();
+             byte[] data = new byte[1024];
+             int bytesRead = input.read(data);
+             System.out.println("Received: " + new String(data, 0, bytesRead));
+             socket.close();
+             serverSocket.close();
+         }
+     }
+     ```
+
+5. **`DatagramSocket` and `DatagramPacket`:** Used for UDP communication.
+
+   - **Example:**
+
+     ```java
+     import java.net.DatagramPacket;
+     import java.net.DatagramSocket;
+
+     public class UDPExample {
+         public static void main(String[] args) throws Exception {
+             DatagramSocket socket = new DatagramSocket();
+             String message = "Hello, UDP!";
+             DatagramPacket packet = new DatagramPacket(message.getBytes(), message.length(), InetAddress.getByName("localhost"), 8080);
+             socket.send(packet);
+             socket.close();
+         }
+     }
+     ```
+
+---
+
+### ➤ Advantages of `java.net`
+
+1. **Simplified Networking:** Provides high-level abstractions for common networking tasks.
+2. **Cross-Platform:** Works seamlessly across different operating systems.
+3. **Built-in Support:** No need for external libraries for basic networking operations.
+
+---
+
+> 📘 **Note:** The `java.net` package is a powerful tool for building networked applications, from simple client-server programs to complex web-based systems.
+
+---
+
+This concludes the detailed explanation of packages and networking in Java.
