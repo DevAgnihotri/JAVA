@@ -102,6 +102,35 @@ Car constructed: SUV in Blue
 
 ---
 
+### Comparison: Abstract Class vs Interface
+
+#### Key Differences Table
+
+| Sr. No. | Parameter            | Class                                                              | Interface                                                                      |
+| ------- | -------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| 1       | Supported Methods    | Can have both abstract and concrete methods                        | Can have only abstract methods (Java 8+ allows default and static methods)     |
+| 2       | Multiple Inheritance | Not supported                                                      | Supported                                                                      |
+| 3       | Supported Variables  | Can have final, non-final, static, and non-static variables        | Only static and final variables are permitted                                  |
+| 4       | Implementation       | A class can implement an interface                                 | Interface cannot implement another interface, but can extend another interface |
+| 5       | Keyword              | Declared using `class` keyword                                     | Declared using `interface` keyword                                             |
+| 6       | Inheritance (Class)  | Can inherit another class using `extends` and implement interfaces | Can inherit only an interface using `extends`                                  |
+| 7       | Inheritance (Usage)  | Can be inherited using `extends` keyword                           | Can only be implemented using `implements` keyword                             |
+| 8       | Access               | Can have any type of members: `private`, `public`, etc.            | Members are implicitly `public`                                                |
+| 9       | Constructor          | Can have constructors                                              | Cannot have constructors                                                       |
+
+#### Additional Comparison Table
+
+| Parameter                     | Abstract Class                                                   | Interface                                                                                        |
+| ----------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Default Method Implementation | Can have default method implementation                           | Provides pure abstraction; cannot have implementation (except default/static methods in Java 8+) |
+| Variables                     | May contain non-final variables                                  | Variables are by default `public static final`                                                   |
+| Keyword Used                  | Extended using `extends` keyword                                 | Implemented using `implements` keyword                                                           |
+| Access Modifiers              | Can have `public`, `protected`, `private`, and default modifiers | Methods are by default `public`; cannot use other access modifiers                               |
+| Speed of Implementation       | Faster than interface                                            | Slightly slower; requires extra indirection                                                      |
+| Normal Class Extension        | Can extend only one abstract class                               | Can implement multiple interfaces                                                                |
+| Constructors                  | Can have constructors                                            | Cannot have constructors                                                                         |
+| Multiple Inheritance          | Can extend another class and implement multiple interfaces       | Can extend another interface only                                                                |
+
 ## 🔹 1. Objects
 
 **Definition:** An object is an instance of a class. It represents a real-world entity with state and behavior.
