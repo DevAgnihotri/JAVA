@@ -1,8 +1,8 @@
 # Exception Handling in Java
 
-## 🔹 What is an Exception?
+> **This file answers your assignment questions in simple English. Each question is clearly marked (Q1, Q2, etc.) and explained with easy points, tables, and examples.**
 
-**Answer to Question 1: What do you mean by Exception?**
+## 🔹 Q1: What do you mean by Exception? What is checked and unchecked exception?
 
 **Definition:**
 An exception is an unexpected event or error that happens during the execution of a program. It stops the normal flow of the program and creates an exception object that contains information about the error.
@@ -51,8 +51,6 @@ Object
 ---
 
 ## 🔹 Checked vs Unchecked Exceptions
-
-**Answer to Question 1 (continued): What is checked and unchecked exception?**
 
 ### ➤ Checked Exceptions
 
@@ -111,9 +109,63 @@ int result = 10 / 0; // ArithmeticException - no need to handle at compile time
 
 ---
 
-## 🔹 Try-Catch Block
+## 🔹 Q2: Exception Chaining
 
-**Answer to Question 3: Explain about try-catch with example**
+**Definition:**
+Exception chaining is a technique where one exception causes another exception. It helps preserve the original cause of an error while adding more specific information.
+
+**Why Use Exception Chaining?**
+
+- Provides complete error information
+- Shows the root cause of the problem
+- Helps in debugging complex applications
+
+**How it Works:**
+When an exception occurs, you can catch it and throw a new exception while preserving the original exception as the "cause."
+
+**Methods for Exception Chaining:**
+
+1. `initCause(Throwable cause)` - Sets the cause
+2. `getCause()` - Gets the original cause
+
+**Example:**
+
+```java
+public class ExceptionChaining {
+    public static void method1() throws Exception {
+        try {
+            method2();
+        } catch (ArithmeticException e) {
+            // Throw new exception but preserve original cause
+            throw new Exception("Error in method1", e);
+        }
+    }
+
+    public static void method2() {
+        int result = 10 / 0; // This throws ArithmeticException
+    }
+
+    public static void main(String[] args) {
+        try {
+            method1();
+        } catch (Exception e) {
+            System.out.println("Main exception: " + e.getMessage());
+            System.out.println("Root cause: " + e.getCause());
+        }
+    }
+}
+```
+
+**Output:**
+
+```
+Main exception: Error in method1
+Root cause: java.lang.ArithmeticException: / by zero
+```
+
+---
+
+## 🔹 Q3: Explain about try-catch with example
 
 **Definition:**
 Try-catch is a mechanism to handle exceptions in Java. Code that might cause an exception is placed in the `try` block, and the handling code is placed in the `catch` block.
@@ -190,9 +242,7 @@ try {
 
 ---
 
-## 🔹 Throwing Exceptions
-
-**Answer to Question 4: What is the meaning of "throwing an exception"? When does an exception throw?**
+## 🔹 Q4: What is the meaning of "throwing an exception"? When does an exception throw?
 
 ### ➤ What is Throwing an Exception?
 
@@ -260,9 +310,7 @@ public class ThrowExample {
 
 ---
 
-## 🔹 Throws vs Throw Keywords
-
-**Answer to Question 5: Explain difference between throws and throw keyword in Java**
+## 🔹 Q5: Explain difference between throws and throw keyword in Java
 
 ### ➤ `throw` Keyword
 
@@ -340,64 +388,6 @@ public class ThrowVsThrows {
         FileReader file = new FileReader(fileName);
     }
 }
-```
-
----
-
-## 🔹 Exception Chaining
-
-**Answer to Question 2: Explain Exception chaining**
-
-**Definition:**
-Exception chaining is a technique where one exception causes another exception. It helps preserve the original cause of an error while adding more specific information.
-
-**Why Use Exception Chaining?**
-
-- Provides complete error information
-- Shows the root cause of the problem
-- Helps in debugging complex applications
-
-**How it Works:**
-When an exception occurs, you can catch it and throw a new exception while preserving the original exception as the "cause."
-
-**Methods for Exception Chaining:**
-
-1. `initCause(Throwable cause)` - Sets the cause
-2. `getCause()` - Gets the original cause
-
-**Example:**
-
-```java
-public class ExceptionChaining {
-    public static void method1() throws Exception {
-        try {
-            method2();
-        } catch (ArithmeticException e) {
-            // Throw new exception but preserve original cause
-            throw new Exception("Error in method1", e);
-        }
-    }
-
-    public static void method2() {
-        int result = 10 / 0; // This throws ArithmeticException
-    }
-
-    public static void main(String[] args) {
-        try {
-            method1();
-        } catch (Exception e) {
-            System.out.println("Main exception: " + e.getMessage());
-            System.out.println("Root cause: " + e.getCause());
-        }
-    }
-}
-```
-
-**Output:**
-
-```
-Main exception: Error in method1
-Root cause: java.lang.ArithmeticException: / by zero
 ```
 
 ---
