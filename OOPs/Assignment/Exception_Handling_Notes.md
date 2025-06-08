@@ -558,9 +558,197 @@ By understanding and properly implementing exception handling, you can write pro
 
 ---
 
-**Programming Questions for Practice:**
+## 🔹 Stack Trace Elements
 
-What is meant by Stream and what are the types of Streams and classes of the
-Streams?
-Write generic Java program that display sum if pass numeric data and merge text if pass string data
-Write Java program that accepts a temperature in Celsius. It should throw an Exception "Temperature Below Normal" when the temperature is less than 20C, throw an Exception "Normal Temperature" when the temperature above 20C and below 40C and throw an Exception "Temperature is High" when the it is greater than 40C.
+**Definition:**
+A stack trace is a list of method calls that the Java Virtual Machine (JVM) was executing at the time an exception was thrown. Each entry in the stack trace is called a **Stack Trace Element**.
+
+**Why Important?**
+
+- Shows the exact sequence of method calls that led to the error (like a breadcrumb trail for debugging)
+- Helps you find where the problem happened in your code, including the file and line number
+- Makes it easier to fix bugs by showing the path the program took before crashing
+
+**How to Read a Stack Trace:**
+
+- The top line shows the exception type and message (e.g., `java.lang.ArithmeticException: / by zero`)
+- Each line below shows a method call (from most recent to oldest)
+- Each line has: class name, method name, file name, and line number
+- The first method listed is where the error actually happened
+
+**Example Stack Trace:**
+
+```
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+    at MyClass.divide(MyClass.java:10)
+    at MyClass.main(MyClass.java:5)
+```
+
+**Explanation of Example:**
+
+- The error happened in the `divide` method at line 10 of `MyClass.java`
+- The `main` method called `divide` at line 5
+- The exception type is `ArithmeticException` and the message is `/ by zero`
+
+**Diagram:**
+
+```
+main()  --->  divide()  --->  Exception!
+```
+
+**How to Get Stack Trace in Java:**
+
+- Every `Throwable` (Exception/Error) object has a method `getStackTrace()` that returns an array of `StackTraceElement` objects
+- You can print the stack trace using `printStackTrace()` method
+
+**Code Example:**
+
+```java
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    e.printStackTrace(); // Prints the stack trace to the console
+    StackTraceElement[] elements = e.getStackTrace();
+    for (StackTraceElement el : elements) {
+        System.out.println("Class: " + el.getClassName() + ", Method: " + el.getMethodName() + ", Line: " + el.getLineNumber());
+    }
+}
+```
+
+**Technical Terms:**
+
+- `StackTraceElement`: Java class representing one entry in the stack trace
+- `Throwable`: Parent class for all errors and exceptions in Java
+- `printStackTrace()`: Method to print the stack trace to the console
+- `getStackTrace()`: Method to get stack trace elements as an array
+
+**Best Practices:**
+
+- Always check the first few lines of the stack trace to find the real cause
+- Use stack traces to debug and fix errors quickly
+- Don't ignore stack traces—they are your best friend for troubleshooting!
+
+---
+
+## 🔹 Input / Output (I/O) Basics
+
+**Definition:**
+Input/Output (I/O) in Java means reading data from a source (like keyboard, file, or network) and writing data to a destination (like screen, file, or network).
+
+### ➤ What is a Stream?
+
+**Answer to Question:**
+A **Stream** is a sequence of data. In Java, streams are used to read data from and write data to different sources.
+
+**Types of Streams:**
+
+1. **Byte Streams** (for binary data)
+2. **Character Streams** (for text data)
+
+**Diagram:**
+
+```
+[Source] --(InputStream/Reader)--> [Java Program] --(OutputStream/Writer)--> [Destination]
+```
+
+---
+
+### ➤ Byte Streams
+
+- Used for reading and writing binary data (images, audio, etc.)
+- Work with 8-bit bytes
+- Main classes: `InputStream` (for input), `OutputStream` (for output)
+
+**Common Byte Stream Classes:**
+| Class | Use |
+|------------------|----------------------------|
+| FileInputStream | Read bytes from a file |
+| FileOutputStream | Write bytes to a file |
+| BufferedInputStream | Fast reading of bytes |
+| BufferedOutputStream | Fast writing of bytes |
+
+---
+
+### ➤ Character Streams
+
+- Used for reading and writing text data (characters)
+- Work with 16-bit Unicode characters
+- Main classes: `Reader` (for input), `Writer` (for output)
+
+**Common Character Stream Classes:**
+| Class | Use |
+|------------------|----------------------------|
+| FileReader | Read characters from a file |
+| FileWriter | Write characters to a file |
+| BufferedReader | Fast reading of text |
+| BufferedWriter | Fast writing of text |
+
+---
+
+### ➤ Reading and Writing
+
+#### Reading
+
+- **InputStream/Reader** classes are used to read data
+- You can read from keyboard, files, or other sources
+
+#### Writing
+
+- **OutputStream/Writer** classes are used to write data
+- You can write to screen, files, or other destinations
+
+---
+
+### ➤ Console Reading and Writing
+
+- **Reading from Console:** Use `Scanner` or `BufferedReader`
+- **Writing to Console:** Use `System.out.print()` or `System.out.println()`
+
+**Example:**
+
+```java
+Scanner sc = new Scanner(System.in); // Read from console
+String name = sc.nextLine();
+System.out.println("Hello, " + name); // Write to console
+```
+
+---
+
+### ➤ Reading and Writing Files
+
+- **Reading a File:** Use `FileInputStream`/`FileReader` (for bytes/characters)
+- **Writing a File:** Use `FileOutputStream`/`FileWriter`
+
+**Example:**
+
+```java
+FileReader fr = new FileReader("data.txt");
+int ch;
+while((ch = fr.read()) != -1) {
+    System.out.print((char)ch);
+}
+fr.close();
+```
+
+---
+
+### ➤ Summary Table: Streams in Java
+
+| Stream Type      | Main Classes (Input)         | Main Classes (Output)          | Data Type      |
+| ---------------- | ---------------------------- | ------------------------------ | -------------- |
+| Byte Stream      | InputStream, FileInputStream | OutputStream, FileOutputStream | Bytes (binary) |
+| Character Stream | Reader, FileReader           | Writer, FileWriter             | Characters     |
+
+---
+
+**Key Points:**
+
+- Use byte streams for binary data, character streams for text
+- Streams make it easy to read/write data from/to files, console, or network
+- Always close streams after use to free resources
+
+**Diagram Recap:**
+
+```
+[Keyboard/File/Network] --(InputStream/Reader)--> [Java Program] --(OutputStream/Writer)--> [Screen/File/Network]
+```
