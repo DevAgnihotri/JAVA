@@ -122,16 +122,14 @@ public class Test {
 }
 ```
 
-
 **Runnable vs Thread**
 
-| Feature        | Extending Thread              | Implementing Runnable         |
-| -------------- | ---------------------------- | ---------------------------- |
-| Inheritance    | Can't extend another class   | Can extend another class      |
-| Code Reuse     | Less                         | More                         |
-| Flexibility    | Less                         | More                         |
-| Use Case       | Simple threads               | When you need inheritance     |
-
+| Feature     | Extending Thread           | Implementing Runnable     |
+| ----------- | -------------------------- | ------------------------- |
+| Inheritance | Can't extend another class | Can extend another class  |
+| Code Reuse  | Less                       | More                      |
+| Flexibility | Less                       | More                      |
+| Use Case    | Simple threads             | When you need inheritance |
 
 ---
 
@@ -156,27 +154,27 @@ public class Test {
 **Ways to Synchronize:**
 
 1. **Synchronized Methods:**  
-    The entire method is locked for one thread at a time.
-    ```java
-    class Counter {
-         private int count = 0;
-         public synchronized void increment() {
-              count++;
-         }
-    }
-    ```
+   The entire method is locked for one thread at a time.
+   ```java
+   class Counter {
+        private int count = 0;
+        public synchronized void increment() {
+             count++;
+        }
+   }
+   ```
 2. **Synchronized Blocks:**  
-    Only a specific block of code is locked, allowing finer control and potentially better performance.
-    ```java
-    class Counter {
-         private int count = 0;
-         public void increment() {
-              synchronized(this) {
-                    count++;
-              }
-         }
-    }
-    ```
+   Only a specific block of code is locked, allowing finer control and potentially better performance.
+   ```java
+   class Counter {
+        private int count = 0;
+        public void increment() {
+             synchronized(this) {
+                   count++;
+             }
+        }
+   }
+   ```
 
 **Key Points:**
 
@@ -243,9 +241,9 @@ public class TestDaemon {
 
 - Java provides the `wait()`, `notify()`, and `notifyAll()` methods for inter-thread communication.
 - These methods must be called from within a synchronized context (inside a synchronized method or block).
-    - `wait()`: Causes the current thread to release the lock and wait until another thread calls `notify()` or `notifyAll()` on the same object.
-    - `notify()`: Wakes up one waiting thread.
-    - `notifyAll()`: Wakes up all waiting threads.
+  - `wait()`: Causes the current thread to release the lock and wait until another thread calls `notify()` or `notifyAll()` on the same object.
+  - `notify()`: Wakes up one waiting thread.
+  - `notifyAll()`: Wakes up all waiting threads.
 
 **Example (Producer-Consumer Concept):**
 
@@ -257,7 +255,6 @@ public class TestDaemon {
 - Always use `wait()`, `notify()`, and `notifyAll()` inside synchronized blocks/methods to avoid `IllegalMonitorStateException`.
 - Inter-thread communication helps avoid busy-waiting and enables efficient thread cooperation.
 - Common use cases: producer-consumer, reader-writer, and thread pools.
-
 
 ---
 
@@ -302,16 +299,244 @@ t2.start();
 
 ## 8. Summary Table
 
-| Topic                | Key Points / Technical Terms                                                                                   |
-|----------------------|---------------------------------------------------------------------------------------------------------------|
-| Thread               | Smallest unit of execution within a process; shares memory, has its own stack and execution context           |
-| Process              | Independent program in execution; has its own memory space and resources; isolated from other processes        |
-| Multitasking         | Running multiple tasks seemingly at once; includes process-based and thread-based multitasking                 |
-| Thread Life Cycle    | States: New, Runnable, Running, Blocked/Waiting, Timed Waiting, Terminated; transitions managed by JVM         |
-| Creating Threads     | Two ways: extend Thread class or implement Runnable interface; use `start()` to begin execution                |
-| Synchronization      | Mechanism to control access to shared resources; uses `synchronized` keyword to prevent race conditions        |
-| Daemon Thread        | Background thread; JVM exits when only daemon threads remain; set with `setDaemon(true)` before `start()`      |
-| Inter-thread Comm.   | Coordination between threads using `wait()`, `notify()`, `notifyAll()`; must be used in synchronized context   |
-| Thread Group         | Organizes multiple threads for collective management; can start, interrupt, or set priorities for a group      |
-| Use Cases            | Examples: background tasks, producer-consumer, thread pools, resource sharing, responsive applications         |
+| Topic              | Key Points / Technical Terms                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Thread             | Smallest unit of execution within a process; shares memory, has its own stack and execution context          |
+| Process            | Independent program in execution; has its own memory space and resources; isolated from other processes      |
+| Multitasking       | Running multiple tasks seemingly at once; includes process-based and thread-based multitasking               |
+| Thread Life Cycle  | States: New, Runnable, Running, Blocked/Waiting, Timed Waiting, Terminated; transitions managed by JVM       |
+| Creating Threads   | Two ways: extend Thread class or implement Runnable interface; use `start()` to begin execution              |
+| Synchronization    | Mechanism to control access to shared resources; uses `synchronized` keyword to prevent race conditions      |
+| Daemon Thread      | Background thread; JVM exits when only daemon threads remain; set with `setDaemon(true)` before `start()`    |
+| Inter-thread Comm. | Coordination between threads using `wait()`, `notify()`, `notifyAll()`; must be used in synchronized context |
+| Thread Group       | Organizes multiple threads for collective management; can start, interrupt, or set priorities for a group    |
+| Use Cases          | Examples: background tasks, producer-consumer, thread pools, resource sharing, responsive applications       |
+
+---
+
+# Generic Programming in Java: Complete Notes
+
+## 1. Introduction to Generic Programming (Q9, Q10, Q11)
+
+**What is Generic Programming? (Q9, Q10, Q11)**
+
+- Generic programming is a paradigm that enables you to write code that can handle different data types using a single implementation. In Java, this is achieved through **generics**, which allow classes, interfaces, and methods to operate on objects of various types while maintaining strong type safety.
+- **Generics** introduce the concept of **type parameters** (like `<T>`) that act as placeholders for actual types, enabling code reuse and reducing redundancy.
+- With generics, the Java compiler performs **compile-time type checking**, which helps catch type-related errors early and eliminates the need for explicit type casting.
+- Technical terms: type parameter, type safety, compile-time checking, type inference, parameterized types.
+
+**Why Use Generics?**
+
+- To avoid code duplication by writing logic once for any type, rather than repeating it for each specific type.
+- To catch type errors at compile time, making code safer and reducing runtime exceptions.
+- To make code more reusable, flexible, and easier to maintain.
+- To improve readability by making the intended type usage explicit.
+
+**Example (without generics):**
+
+```java
+ArrayList list = new ArrayList();
+list.add("Hello");
+list.add(123); // No error at compile time, but may cause problems at runtime
+String s = (String) list.get(0); // Requires casting
+```
+
+**Example (with generics):**
+
+```java
+ArrayList<String> list = new ArrayList<>();
+list.add("Hello");
+// list.add(123); // Compile-time error: incompatible types
+String s = list.get(0); // No casting needed
+```
+
+- Using generics, you ensure that only the specified type (e.g., `String`) can be added to the collection, preventing accidental misuse and making your code more robust.
+
+**Advantages and Disadvantages of Generics (Q11):**
+
+| Advantages                                   | Disadvantages / Limitations                                 |
+| -------------------------------------------- | ----------------------------------------------------------- |
+| Type safety at compile time                  | Cannot use primitive types directly (e.g., `int`, `double`) |
+| Code reusability and flexibility             | Type information is erased at runtime (type erasure)        |
+| No need for explicit type casting            | Cannot create arrays of generic types (e.g., `T[]`)         |
+| Fewer runtime errors (early error detection) | Cannot use `instanceof` with parameterized types            |
+| Cleaner, more readable and maintainable code | Cannot instantiate generic type parameters (`new T()`)      |
+| Supports compile-time checking               | Static members cannot use type parameters                   |
+| Enables implementation of generic algorithms | Cannot create generic exceptions or catch them              |
+| Reduces code duplication                     | Type parameters cannot be used in static contexts           |
+| Works well with collections framework        | Some reflection operations are limited                      |
+
+---
+
+## 2. Generic Classes (Q9, Q10, Q11, Q12)
+
+**What is a Generic Class?**
+
+- A **generic class** is a class that can operate on objects of various types while providing compile-time type safety.
+- It uses a **type parameter** (like `<T>`) as a placeholder for the actual type that will be specified when an object is created.
+- Syntax: `class ClassName<T> { ... }`
+- Technical terms: type parameter, parameterized class, type argument, type inference.
+
+**Why Use Generic Classes?**
+
+- To write reusable, type-safe code that works with any object type.
+- To avoid code duplication (no need to write separate classes for each data type).
+- To catch type errors at compile time, reducing runtime exceptions.
+- To eliminate the need for explicit type casting.
+
+**Example: Basic Generic Class**
+
+```java
+class Box<T> {
+    private T value;
+    public void set(T value) { this.value = value; }
+    public T get() { return value; }
+}
+```
+
+**How to Use:**
+
+```java
+Box<Integer> intBox = new Box<>();
+intBox.set(10);
+System.out.println(intBox.get()); // Output: 10
+
+Box<String> strBox = new Box<>();
+strBox.set("Hello");
+System.out.println(strBox.get()); // Output: Hello
+```
+
+**Q12: Bounded Generic Classes (with example)**
+
+- Sometimes you want to restrict the types that can be used as type parameters.
+- Use **bounded types** with `extends` (for upper bound) or `super` (for lower bound).
+
+**Example (Q12):**
+
+```java
+// Only allow Number or its subclasses
+class NumericBox<T extends Number> {
+    private T num;
+    public NumericBox(T num) { this.num = num; }
+    public double doubleValue() { return num.doubleValue(); }
+}
+```
+
+---
+
+## 3. Generic Methods
+
+**What is a Generic Method?**
+
+- A **generic method** is a method that introduces its own type parameter(s), allowing it to operate on different types independently of any generic type parameters declared by its class.
+- Syntax: `<T> ReturnType methodName(T param)`
+- Generic methods can be declared in both generic and non-generic classes.
+
+**Why Use Generic Methods?**
+
+- To write reusable, type-safe methods that work with any type.
+- To avoid code duplication for similar logic that operates on different types.
+- To enable compile-time type checking and eliminate the need for explicit casting.
+
+**When to Use Generic Methods?**
+
+- When the logic of a method is independent of the type of data it processes.
+- When you want to perform operations like printing, swapping, comparing, or processing elements of any type.
+- When you need to write utility/helper methods that should work for multiple types (e.g., sorting arrays, finding maximum/minimum, etc.).
+
+**Example: Print Array Elements**
+
+```java
+public <T> void printArray(T[] array) {
+    for (T item : array) {
+        System.out.println(item);
+    }
+}
+```
+
+---
+
+## 4. Bounded Types: Restrictions and Limitations (Q12)
+
+**What are Bounded Types?**
+
+- Bounded types restrict the kinds of types that can be used as generic parameters.
+- Use `extends` for upper bounds (e.g., `<T extends Number>`) and `super` for lower bounds (e.g., `<? super Integer>`).
+
+**Why Use Bounds?**
+
+- To ensure that the type parameter has certain properties or methods (e.g., only numbers can be used for math operations).
+
+**Limitations of Generics:**
+
+- Cannot use primitive types directly (use wrapper classes like Integer, Double)
+- Cannot create arrays of generic types (e.g., `T[] arr = new T[10];` is not allowed)
+- Type information is erased at runtime (type erasure)
+- Cannot use `instanceof` with parameterized types (e.g., `if (obj instanceof Box<String>)` is not allowed)
+- Cannot instantiate generic type parameters (e.g., `new T()` is not allowed)
+- Cannot create static fields or methods that use type parameters (type parameters are not available in static context)
+- Cannot throw or catch generic types (e.g., `catch (T e)` is not allowed)
+- Cannot use generic type parameters in exception classes
+- Cannot use generic type parameters with `synchronized` blocks (e.g., `synchronized(T.class)` is not allowed)
+- Cannot perform explicit type casting to a parameterized type (e.g., `(Box<String>) obj` may cause warnings)
+- Cannot create generic enums or generic annotation types
+- Type parameters cannot be used with reflection to obtain runtime type information
+
+---
+
+## 5. Q8: Generic Program for Sum or Merge
+
+**Q8: Write a generic Java program that displays the sum if numeric data is passed and merges text if string data is passed.**
+
+**Example:**
+
+```java
+class Utility {
+    public static <T> void process(T a, T b) {
+        if (a instanceof Number && b instanceof Number) {
+            double sum = ((Number)a).doubleValue() + ((Number)b).doubleValue();
+            System.out.println("Sum: " + sum);
+        } else if (a instanceof String && b instanceof String) {
+            System.out.println("Merged: " + a.toString() + b.toString());
+        } else {
+            System.out.println("Unsupported types");
+        }
+    }
+}
+// Usage:
+// Utility.process(10, 20); // Output: Sum: 30.0
+// Utility.process("Hello", "World"); // Output: Merged: HelloWorld
+```
+
+---
+
+## 6. Summary Table
+
+| Topic            | Key Points / Technical Terms                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Generics         | Enables code to work with any reference type; provides compile-time type safety; reduces code duplication          |
+| Generic Class    | Class with type parameter(s) (e.g., `<T>`); allows creation of type-safe, reusable classes                         |
+| Generic Method   | Method with its own type parameter(s); can be used in generic or non-generic classes; enables flexible utilities   |
+| Bounded Type     | Restricts type parameter using `extends` (upper bound) or `super` (lower bound); ensures type has required methods |
+| Type Erasure     | Type parameters are removed at compile time; generic type info not available at runtime                            |
+| Limitations      | Cannot use primitives as type parameters; cannot create arrays of generic types; cannot instantiate type parameter |
+| Type Safety      | Compile-time checking prevents invalid type assignments; eliminates need for explicit casting                      |
+| Code Reusability | Write logic once for any type; improves maintainability and reduces redundancy                                     |
+| Wildcards        | Use `?`, `? extends T`, `? super T` for flexible method parameters and collections                                 |
+| Use Cases        | Collections framework, utility classes, algorithms (sorting, searching), type-safe containers                      |
+
+## PYQs inluded
+
+1. What is a thread? Explain the life cycle of a thread with a proper diagram.
+2. Compare thread-based and process-based multitasking in Java.
+3. Explain the different ways to create a thread in Java.
+4. Discuss synchronizing threads and daemon threads.
+5. Differentiate the usage of `Runnable` and `Thread` for multithreading.
+6. What is the difference between process-based and thread-based multitasking?
+7. Give the two ways by which a thread can be created using Java. Write a short program to demonstrate the creation of a new thread by extending the `Thread` class.
+8. Write a generic Java program that displays the sum if numeric data is passed and merges text if string data is passed.
+9. Explain generic programming concepts in Java.
+10. Discuss generic programming in Java.
+11. What do you mean by generics in Java? Explain the advantages and disadvantages of generic programming in Java.
+12. Discuss generic bounded classes with the help of a suitable example.
 
