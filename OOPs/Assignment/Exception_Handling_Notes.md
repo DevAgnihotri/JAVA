@@ -752,3 +752,16 @@ fr.close();
 ```
 [Keyboard/File/Network] --(InputStream/Reader)--> [Java Program] --(OutputStream/Writer)--> [Screen/File/Network]
 ```
+LAST YEAR QUES
+
+q. What do you mean by Exception? What is checked and unchecked exception?
+q. Explain Exception chaining. 
+Q. Explain about try-catch with example. 
+Q. What is the meaning of “throwing an exception”? When does an exception
+throw?
+Q. Explain difference between throws and throw keyword in Java. 3
+
+Q. What is meant by Stream and what are the types of Streams and classes of the
+Streams? 
+Q. Write generic Java program that display sum if pass numeric data and merge text if pass string data
+Q. Write Java program that accepts a temperature in Celsius. It should throw an Exception “Temperature Below Normal” when the temperature is less than 20C, throw an Exception “Normal Temperature” when the temperature above 20C and below 40C and throw an Exception “Temperature is High” when the it is greater than 40C.
