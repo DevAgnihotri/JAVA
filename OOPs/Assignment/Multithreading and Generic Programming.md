@@ -6,10 +6,10 @@
 
 **Definition of Thread (Q1, Q5):**
 
-- A **thread** is the smallest unit of execution within a process. It represents a single path of execution of instructions.
-- Threads are sometimes called "lightweight processes" because they run within the context of a process and share its resources (like memory, files, etc.), but each thread has its own stack, program counter, and local variables.
-- In Java, threads enable concurrent execution of two or more parts of a program for maximum utilization of CPU. This is useful for tasks like background calculations, handling user input, or performing I/O operations without freezing the main application.
-- Technical term: Threads in the same process share the process’s address space, but each thread maintains its own execution context (stack, registers, program counter).
+- A **thread** is a small part of a program that can run independently at the same time as other parts.  
+- Threads share the same memory and resources of the main program but each thread does its own work separately.  
+- In Java, threads help you do many things at once, like downloading a file while showing a progress bar.  
+- Simply put, a thread lets your program do more than one task at the same time.
 
 **Definition of Process:**
 
